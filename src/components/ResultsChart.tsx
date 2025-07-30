@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -30,6 +31,24 @@ interface ResultsChartProps {
 export function ResultsChart({ data, cashFlowAmount = 250 }: ResultsChartProps) {
   const chartData = data.data;
   const { crossoverPoint, coveragePoint, debtPayoffMonths } = data;
+
+  // Hook to detect mobile screens
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Check initially
+    checkIsMobile();
+
+    // Add event listener
+    window.addEventListener('resize', checkIsMobile);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   // Find the actual data points for markers
   const crossoverData = crossoverPoint ? chartData.find(d => d.month === crossoverPoint) : undefined;
@@ -95,8 +114,8 @@ export function ResultsChart({ data, cashFlowAmount = 250 }: ResultsChartProps) 
           data={chartData}
           margin={{
             top: 20,
-            right: 30,
-            left: 60,
+            right: isMobile ? 10 : 30,
+            left: isMobile ? 20 : 60,
             bottom: 20,
           }}
         >
@@ -113,17 +132,17 @@ export function ResultsChart({ data, cashFlowAmount = 250 }: ResultsChartProps) 
             domain={['dataMin', 'dataMax']}
             tickFormatter={formatXAxis}
             interval="preserveStartEnd"
-            tick={{ fontSize: 12, fill: '#6b7280' }}
+            tick={{ fontSize: isMobile ? 10 : 12, fill: '#6b7280' }}
             axisLine={{ stroke: '#d1d5db' }}
             tickLine={{ stroke: '#d1d5db' }}
           />
           
           <YAxis 
             tickFormatter={formatCurrency}
-            tick={{ fontSize: 12, fill: '#6b7280' }}
+            tick={{ fontSize: isMobile ? 10 : 12, fill: '#6b7280' }}
             axisLine={{ stroke: '#d1d5db' }}
             tickLine={{ stroke: '#d1d5db' }}
-            width={80}
+            width={isMobile ? 50 : 80}
           />
           
           <Tooltip 
@@ -134,13 +153,17 @@ export function ResultsChart({ data, cashFlowAmount = 250 }: ResultsChartProps) 
               border: '1px solid #e5e7eb',
               borderRadius: '8px',
               boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-              fontSize: '14px'
+              fontSize: isMobile ? '12px' : '14px'
             }}
             cursor={{ stroke: '#e5e7eb', strokeWidth: 1 }}
           />
           
           <Legend 
-            wrapperStyle={{ paddingTop: '20px', fontSize: '14px' }}
+            wrapperStyle={{ 
+              paddingTop: '20px', 
+              fontSize: isMobile ? '12px' : '14px',
+              textAlign: 'center'
+            }}
             iconType="line"
           />
 
@@ -222,7 +245,7 @@ export function ResultsChart({ data, cashFlowAmount = 250 }: ResultsChartProps) 
       {/* Enhanced Legend for special points */}
       <div className="mt-8 bg-slate-50 border border-slate-200 rounded-xl p-6">
         <h4 className="font-semibold text-slate-800 text-center mb-4">Key Milestones</h4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div className={`grid gap-4 text-sm ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-3'}`}>
           {(() => {
             // Create milestone objects with timing and details
             const milestones = [];
