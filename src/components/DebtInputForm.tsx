@@ -32,13 +32,19 @@ interface DebtInputFormProps {
 }
 
 const FieldTooltip = ({ content }: { content: string }) => (
-  <TooltipProvider>
+  <TooltipProvider delayDuration={0}>
     <Tooltip>
       <TooltipTrigger asChild>
-        <HelpCircle className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-help" />
+        <button
+          type="button"
+          className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-help focus:outline-none focus:text-gray-600"
+          aria-label="Help information"
+        >
+          <HelpCircle className="h-4 w-4" />
+        </button>
       </TooltipTrigger>
-      <TooltipContent>
-        <p className="max-w-xs">{content}</p>
+      <TooltipContent side="top" className="max-w-xs">
+        <p>{content}</p>
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
