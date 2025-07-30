@@ -1,0 +1,86 @@
+# Invest vs Debt Calculator - Product Requirements Document
+
+## Project Overview
+A financial calculator application that helps users determine whether their additional cash flow should be allocated toward paying off debt or contributing toward investments. The application provides a clear, data-driven comparison with visual charts to support decision-making.
+
+## Core Functionality
+
+### Application Structure
+- **Single Page Application**: No landing page required - users go directly to the calculator
+- **No Tab Navigation**: All three information sections are visible simultaneously on one page
+- **Real-time Calculations**: Results update immediately as users input data
+
+### Primary Question
+**"Should the user's additional cash flow be allocated toward paying off debt or contributed toward investment?"**
+
+## Feature Specifications
+
+### 1. Debt Information Section
+- **Current Debt Amount**: Dollar input field
+- **Current Interest Rate**: Percentage input field (annual rate)
+- **Minimum Payment Frequency**: Dropdown (weekly, bi-weekly, monthly, quarterly, annually)
+- **Minimum Payment Amount**: Dollar input field
+- **Time Remaining on Debt**: Input field with default value of 30 years
+
+### 2. Investment Information Section
+- **Current Investment Amount**: Dollar input field
+- **Expected Rate of Return**: Percentage input field (annual expected return)
+
+### 3. Cash Flow Information Section
+- **Cash Flow Frequency**: Dropdown options
+  - Lump-Sum
+  - Weekly
+  - Bi-weekly
+  - Monthly
+  - Quarterly
+  - Annually
+- **Cash Flow Amount**: Dollar input field
+
+## Chart Requirements
+
+### Primary Visualization
+- **Dual-line Chart**: Shows debt balance and investment balance over time
+- **Time Horizon**: Extends until debt is paid off or a reasonable investment timeline
+- **Key Milestones**:
+  1. **Crossover Point**: Highlight when investment balance would surpass debt balance (if applicable)
+  2. **Coverage Point**: Highlight when expected investment returns could cover minimum monthly debt payment without reducing investment principal (if applicable)
+
+### Decision Output
+- **Clear Recommendation**: Simple statement indicating whether investing or paying off debt is more optimal
+- **Disclaimer**: Include "Not financial advice" disclaimer
+
+## User Experience Requirements
+
+### Design Principles
+- **Premier User Experience**: Intuitive, smooth, and responsive interactions
+- **Amazing UI Design**: Modern, clean, and visually appealing interface
+- **Simplicity**: Easy to understand and use, no unnecessary complexity
+- **Elegance**: Sophisticated design that inspires confidence
+
+### Usability Features
+- **Input Validation**: Real-time validation with helpful error messages
+- **Responsive Design**: Works seamlessly across desktop, tablet, and mobile
+- **Loading States**: Smooth transitions and feedback during calculations
+- **Accessibility**: WCAG compliant for screen readers and keyboard navigation
+
+### Visual Hierarchy
+- **Clear Section Separation**: Distinct visual boundaries between the three main sections
+- **Prominent Chart**: Chart should be the focal point of the page
+- **Actionable Results**: Decision recommendation should be highly visible
+
+## Technical Considerations
+
+### Performance
+- **Real-time Updates**: Calculations and chart updates should be instantaneous
+- **Smooth Animations**: Chart transitions and UI interactions should be fluid
+- **Optimized Rendering**: Efficient chart rendering for complex time series data
+
+### Data Handling
+- **Input Persistence**: Remember user inputs during session
+- **Calculation Accuracy**: Financial calculations must be precise and reliable
+- **Edge Case Handling**: Graceful handling of extreme values or invalid inputs
+
+## Success Metrics
+- **User Engagement**: Time spent on calculator and completion rates
+- **Decision Confidence**: Users should feel confident in the recommendation provided
+- **Return Usage**: Users return to recalculate with different scenarios
