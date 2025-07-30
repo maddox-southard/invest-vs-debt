@@ -108,7 +108,7 @@ export function ResultsChart({ data, cashFlowAmount = 250 }: ResultsChartProps) 
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full" style={{ touchAction: isMobile ? 'manipulation' : 'auto' }}>
       <ResponsiveContainer width="100%" height={500}>
         <LineChart
           data={chartData}
@@ -118,6 +118,7 @@ export function ResultsChart({ data, cashFlowAmount = 250 }: ResultsChartProps) 
             left: isMobile ? 20 : 60,
             bottom: 20,
           }}
+          style={{ touchAction: 'manipulation' }}
         >
           <CartesianGrid 
             strokeDasharray="3 3" 
@@ -153,9 +154,12 @@ export function ResultsChart({ data, cashFlowAmount = 250 }: ResultsChartProps) 
               border: '1px solid #e5e7eb',
               borderRadius: '8px',
               boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-              fontSize: isMobile ? '12px' : '14px'
+              fontSize: isMobile ? '12px' : '14px',
+              pointerEvents: 'none'
             }}
             cursor={{ stroke: '#e5e7eb', strokeWidth: 1 }}
+            allowEscapeViewBox={{ x: false, y: false }}
+            isAnimationActive={false}
           />
           
           <Legend 
@@ -174,8 +178,8 @@ export function ResultsChart({ data, cashFlowAmount = 250 }: ResultsChartProps) 
             stroke="#ef4444"
             strokeWidth={3}
             name="Debt Balance (Minimum Payments Only)"
-            dot={false}
-            activeDot={{ r: 4, fill: '#ef4444', strokeWidth: 2, stroke: '#ffffff' }}
+            dot={isMobile ? { r: 3, fill: '#ef4444', strokeWidth: 1, stroke: '#ffffff' } : false}
+            activeDot={{ r: isMobile ? 8 : 4, fill: '#ef4444', strokeWidth: 2, stroke: '#ffffff' }}
             connectNulls={false}
           />
           
@@ -185,8 +189,8 @@ export function ResultsChart({ data, cashFlowAmount = 250 }: ResultsChartProps) 
             stroke="#10b981"
             strokeWidth={3}
             name="Investment Balance (Extra Payments Invested)"
-            dot={false}
-            activeDot={{ r: 4, fill: '#10b981', strokeWidth: 2, stroke: '#ffffff' }}
+            dot={isMobile ? { r: 3, fill: '#10b981', strokeWidth: 1, stroke: '#ffffff' } : false}
+            activeDot={{ r: isMobile ? 8 : 4, fill: '#10b981', strokeWidth: 2, stroke: '#ffffff' }}
             connectNulls={false}
           />
 
