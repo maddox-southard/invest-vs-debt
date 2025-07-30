@@ -110,7 +110,7 @@ export function OptimalDecisionDisplay({
             <div>
               <span className="font-medium text-slate-800">Psychological Factors:</span>
               <span className="text-slate-600 ml-1">
-                Some people sleep better being debt-free, and that peace of mind has real value. Investment returns aren't 
+                Some people sleep better being debt-free, and that peace of mind has real value. Investment returns aren&apos;t 
                 guaranteed while debt payoff provides certain savings. Consider your stress tolerance and financial anxiety.
               </span>
             </div>
@@ -121,7 +121,7 @@ export function OptimalDecisionDisplay({
             <div>
               <span className="font-medium text-slate-800">Inflation & Income Growth:</span>
               <span className="text-slate-600 ml-1">
-                Fixed-rate debt becomes "cheaper" over time as inflation and wage growth make payments less burdensome relative to your income. 
+                Fixed-rate debt becomes &ldquo;cheaper&rdquo; over time as inflation and wage growth make payments less burdensome relative to your income. 
                 Meanwhile, investments may provide better inflation protection and grow alongside your increasing earning potential.
               </span>
             </div>
