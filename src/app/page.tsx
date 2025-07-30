@@ -5,7 +5,6 @@ import { DebtInputForm } from "@/components/DebtInputForm";
 import { InvestmentInputForm } from "@/components/InvestmentInputForm";
 import { CashFlowInputForm } from "@/components/CashFlowInputForm";
 import { Button } from "@/components/ui/button";
-import { RotateCcw } from "lucide-react";
 import { calculateComparison } from "@/lib/calculations/comparison";
 import { generateOptimalDecision } from "@/lib/recommendation";
 import { ResultsChart } from "@/components/ResultsChart";
@@ -47,33 +46,6 @@ export default function Home() {
   const [optimalDecision, setOptimalDecision] = useState<any>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
-  const resetToDefaults = () => {
-    // Clear localStorage and reset to defaults
-    localStorage.removeItem("debt-v2");
-    localStorage.removeItem("investment-v2");
-    localStorage.removeItem("cashFlow-v2");
-    
-    // Reset state to defaults
-    setDebt({
-      balance: 100000,
-      interestRate: 5.0,
-      minimumPayment: calculate30YearPayment(100000, 5.0), // Auto-calculate based on 30-year amortization
-      paymentFrequency: "monthly",
-    });
-    setInvestment({
-      returnRate: 7.5,
-      initialInvestment: 0,
-    });
-    setCashFlow({
-      frequency: "monthly",
-      amount: 250,
-    });
-    
-    // Clear results
-    setResults(null);
-    setOptimalDecision(null);
-  };
-
   const handleCalculate = () => {
     setIsCalculating(true);
     
@@ -99,20 +71,9 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-10">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-800">
-              Invest vs Debt Calculator
-            </h1>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={resetToDefaults}
-              className="text-slate-600 hover:text-slate-900 border-slate-300"
-              title="Reset to default values"
-            >
-              <RotateCcw size={16} />
-            </Button>
-          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
+            Invest vs. Debt Calculator
+          </h1>
           <p className="text-slate-600 text-lg max-w-3xl mx-auto leading-relaxed">
             Determine whether your additional extra payment should be allocated toward paying off debt or contributing toward investments.
           </p>
