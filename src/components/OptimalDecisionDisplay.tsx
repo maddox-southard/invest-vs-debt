@@ -90,6 +90,56 @@ export function OptimalDecisionDisplay({
         </p>
       </div>
 
+      {/* Other Considerations */}
+      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <h4 className="font-semibold text-slate-800 mb-4">Other Considerations</h4>
+        <div className="space-y-4">
+          <div className="flex items-start gap-3">
+            <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
+            <div>
+              <span className="font-medium text-slate-800">Liquidity & Financial Flexibility:</span>
+              <span className="text-slate-600 ml-1">
+                Extra debt payments lock your money away permanently, while investments provide access for emergencies, 
+                home purchases, or business opportunities. This optionality has real value beyond the mathematical comparison.
+              </span>
+            </div>
+          </div>
+          
+          <div className="flex items-start gap-3">
+            <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5 flex-shrink-0"></div>
+            <div>
+              <span className="font-medium text-slate-800">Psychological Factors:</span>
+              <span className="text-slate-600 ml-1">
+                Some people sleep better being debt-free, and that peace of mind has real value. Investment returns aren't 
+                guaranteed while debt payoff provides certain savings. Consider your stress tolerance and financial anxiety.
+              </span>
+            </div>
+          </div>
+          
+          <div className="flex items-start gap-3">
+            <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5 flex-shrink-0"></div>
+            <div>
+              <span className="font-medium text-slate-800">Inflation & Income Growth:</span>
+              <span className="text-slate-600 ml-1">
+                Fixed-rate debt becomes "cheaper" over time as inflation and wage growth make payments less burdensome relative to your income. 
+                Meanwhile, investments may provide better inflation protection and grow alongside your increasing earning potential.
+              </span>
+            </div>
+          </div>
+          
+          <div className="flex items-start gap-3">
+            <div className="w-2 h-2 bg-amber-500 rounded-full mt-1.5 flex-shrink-0"></div>
+            <div>
+              <span className="font-medium text-slate-800">Debt Type Matters:</span>
+              <span className="text-slate-600 ml-1">
+                Different debts have different strategic implications. Mortgages often provide tax benefits and build equity, 
+                student loans may have forgiveness programs, while high-interest credit card debt should typically be prioritized for payoff.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Confidence Level Explanation */}
       <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
         <h4 className="font-semibold text-slate-800 mb-3">Understanding Confidence Levels</h4>
