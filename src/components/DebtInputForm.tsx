@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -18,12 +18,6 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { HelpCircle } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { Debt } from "@/lib/calculations/debt";
 
 interface DebtInputFormProps {
@@ -31,24 +25,65 @@ interface DebtInputFormProps {
   onChange: (value: Debt) => void;
 }
 
-const FieldTooltip = ({ content }: { content: string }) => (
-  <TooltipProvider delayDuration={0}>
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <button
-          type="button"
-          className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-help focus:outline-none focus:text-gray-600"
-          aria-label="Help information"
+const FieldTooltip = ({ content }: { content: string }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node) &&
+          buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+        setIsVisible(false);
+      }
+    };
+
+    if (isVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [isVisible]);
+
+  const handleInteraction = () => {
+    if (isMobile) {
+      setIsVisible(!isVisible);
+    }
+  };
+
+  return (
+    <div className="relative inline-block">
+      <button
+        ref={buttonRef}
+        type="button"
+        className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-help focus:outline-none focus:text-gray-600"
+        aria-label="Help information"
+        onClick={handleInteraction}
+        onMouseEnter={() => !isMobile && setIsVisible(true)}
+        onMouseLeave={() => !isMobile && setIsVisible(false)}
+      >
+        <HelpCircle className="h-4 w-4" />
+      </button>
+      {isVisible && (
+        <div
+          ref={tooltipRef}
+          className="absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-sm text-white bg-gray-900 rounded-md shadow-lg max-w-xs whitespace-normal"
+          style={{ minWidth: '200px' }}
         >
-          <HelpCircle className="h-4 w-4" />
-        </button>
-      </TooltipTrigger>
-      <TooltipContent side="top" className="max-w-xs">
-        <p>{content}</p>
-      </TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
-);
+          <p>{content}</p>
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 // Calculate monthly payment for 30-year amortization
 const calculate30YearPayment = (principal: number, annualRate: number, frequency: string): number => {
