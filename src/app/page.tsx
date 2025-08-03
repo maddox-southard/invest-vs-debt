@@ -13,6 +13,8 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { Debt } from "@/lib/calculations/debt";
 import { Investment } from "@/components/InvestmentInputForm";
 import { CashFlow } from "@/components/CashFlowInputForm";
+import { AdvancedModeToggle } from "@/components/AdvancedModeToggle";
+import { SupportBanner } from "@/components/SupportBanner";
 
 // Calculate minimum payment for 30-year amortization
 const calculate30YearPayment = (principal: number, annualRate: number): number => {
@@ -69,6 +71,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <SupportBanner />
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
@@ -98,6 +101,11 @@ export default function Home() {
             <h2 className="text-2xl font-semibold text-center text-slate-800">Extra Payment Information</h2>
             <CashFlowInputForm value={cashFlow} onChange={setCashFlow} />
           </div>
+        </div>
+
+        {/* Advanced Mode Toggle */}
+        <div className="flex justify-center mb-6">
+          <AdvancedModeToggle />
         </div>
 
         {/* Calculate Button */}
@@ -137,6 +145,8 @@ export default function Home() {
             )}
           </div>
         )}
+
+
       </div>
     </div>
   );
